@@ -13,6 +13,11 @@
 #include "NzgDoc.h"
 #include "NzgTabView.h"
 
+#include "Plot2dDoc.h"
+#include "Plot2dFrame.h"
+#include "Plot2dView.h"
+#include "Plot2dNode.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -28,6 +33,7 @@ BEGIN_MESSAGE_MAP(CNzgApp, CWinAppEx)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 	ON_COMMAND(ID_NEW_NON, &CNzgApp::OnNewNzg)
+	ON_COMMAND(ID_NEW_PLOT2D, &CNzgApp::OnNewPlot2d)
 END_MESSAGE_MAP()
 
 
@@ -100,6 +106,45 @@ CNzgTabView* CNzgApp::findNzgView(const nzg::NzgNode* pn) const
 	return NULL;
 }
 
+void CNzgApp::showPlot2dView(nzg::Plot2dNode* node)
+{
+	CPlot2dView* pView = findPlot2dView(node);
+	if (pView == nullptr)
+	{
+		CPlot2dDoc* pDoc = (CPlot2dDoc*)m_ptemplPlot2d->CreateNewDocument();
+		pDoc->m_pn = node;
+
+		CFrameWnd* pFrame = m_ptemplPlot2d->CreateNewFrame(pDoc, NULL);
+		m_ptemplPlot2d->InitialUpdateFrame(pFrame, pDoc);
+	}
+	else
+	{
+		CMDIChildWnd* pChild = (CMDIChildWnd*)pView->GetParentFrame();
+		pChild->MDIActivate();
+	}
+
+}
+
+CPlot2dView* CNzgApp::findPlot2dView(const nzg::Plot2dNode* pn) const
+{
+	POSITION pos = m_ptemplPlot2d->GetFirstDocPosition();
+	while (pos != NULL)
+	{
+		CPlot2dDoc* pDoc = (CPlot2dDoc*)m_ptemplPlot2d->GetNextDoc(pos);
+		if (pDoc->m_pn == pn)
+		{
+			POSITION posView = pDoc->GetFirstViewPosition();
+			while (posView != NULL)
+			{
+				CPlot2dView* pView = (CPlot2dView*)pDoc->GetNextView(posView);
+				return pView;
+			}
+			return NULL;
+		}
+	}
+
+	return NULL;
+}
 
 // CNzgApp initialization
 
@@ -164,6 +209,15 @@ BOOL CNzgApp::InitInstance()
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
 	m_ptemplNzg = pDocTemplate;
+
+	pDocTemplate = new CMultiDocTemplate(IDR_PLOT2D_TYPE,
+		RUNTIME_CLASS(CPlot2dDoc),
+		RUNTIME_CLASS(CPlot2dFrame), // custom MDI child frame
+		RUNTIME_CLASS(CPlot2dView));
+	if (!pDocTemplate)
+		return FALSE;
+	AddDocTemplate(pDocTemplate);
+	m_ptemplPlot2d = pDocTemplate;
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
@@ -321,4 +375,31 @@ void CNzgApp::onViewNzg(nzg::NzgNode* pn)
 	}
 
 
+}
+
+void CNzgApp::onViewPlot2d(nzg::Plot2dNode* pn)
+{
+	CPlot2dView* pView = findPlot2dView(pn);
+	if (pView == nullptr)
+	{
+		CPlot2dDoc* pDoc = (CPlot2dDoc*)m_ptemplPlot2d->CreateNewDocument();
+		pDoc->m_pn = pn;
+
+		CFrameWnd* pFrame = m_ptemplPlot2d->CreateNewFrame(pDoc, NULL);
+		m_ptemplPlot2d->InitialUpdateFrame(pFrame, pDoc);
+	}
+	else
+	{
+		CMDIChildWnd* pChild = (CMDIChildWnd*)pView->GetParentFrame();
+		pChild->MDIActivate();
+	}
+
+
+}
+
+void CNzgApp::OnNewPlot2d()
+{
+	std::shared_ptr<nzg::Plot2dNode> p(new nzg::Plot2dNode());
+	m_nodes.push_back(p);
+	getFileView()->newPlot2d(p.get());
 }

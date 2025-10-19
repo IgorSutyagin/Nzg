@@ -16,6 +16,7 @@
 class CNzgTabView;
 class CMainFrame;
 class CNzgApp;
+class CPlot2dView;
 // CNzgApp:
 // See Nzg.cpp for the implementation of this class
 //
@@ -40,20 +41,26 @@ public:
 	nzg::ScreenParams m_sp;
 	std::vector <std::shared_ptr<nzg::Node>> m_nodes;
 	CMultiDocTemplate* m_ptemplNzg;
+	CMultiDocTemplate* m_ptemplPlot2d;
 
 	void showNzgView(nzg::NzgNode* node);
 	CNzgTabView* findNzgView(const nzg::NzgNode* node) const;
+
+	void showPlot2dView(nzg::Plot2dNode* node);
+	CPlot2dView* findPlot2dView(const nzg::Plot2dNode* node) const;
 
 	virtual void PreLoadState();
 	virtual void LoadCustomState();
 	virtual void SaveCustomState();
 	void onViewNzg(nzg::NzgNode* pn);
+	void onViewPlot2d(nzg::Plot2dNode* pn);
 
 	BOOL ProcessShellCommand(CCommandLineInfo& rCmdInfo);
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnNewNzg();
+	afx_msg void OnNewPlot2d();
 };
 
 extern CNzgApp theApp;

@@ -5,6 +5,7 @@
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDD_FORMVIEW_NZG                101
+#define IDD_FORMVIEW_2DPLOT             102
 #define IDR_POPUP_EDIT                  119
 #define ID_STATUSBAR_PANE1              120
 #define ID_STATUSBAR_PANE2              121
@@ -86,6 +87,7 @@
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
 #define IDR_POPUP                       310
+#define IDR_PLOT2D_TYPE                 315
 #define IDC_BUTTON_PLAY                 1001
 #define IDC_BUTTON_PLAY2                1002
 #define IDC_EDIT_VALUE_STEP             1003
@@ -102,17 +104,30 @@
 #define IDC_CHECK_MASK                  1014
 #define IDC_EDIT_ISO_STEP2              1015
 #define IDC_EDIT_COLS                   1015
+#define IDC_BUTTON_SAVE                 1071
+#define IDC_BUTTON_LOAD                 1072
+#define IDC_CHECK_X_AUTO                1136
+#define IDC_CHECK_Y_AUTO                1140
+#define IDC_EDIT_Y_MIN                  1141
+#define IDC_EDIT_Y_MAX                  1142
+#define IDC_EDIT_X_MAX                  1144
+#define IDC_EDIT_X_MIN                  1145
+#define IDC_EDIT_Y_DIVS                 1253
+#define IDC_EDIT_X_DIVS                 1254
+#define IDC_BUTTON_ADD_COMMENT          1256
+#define IDC_BUTTON_REMOVE_COMMENTS      1257
 #define ID_NEW_NON                      32771
 #define ID_NONE_REMOVEALL               32772
 #define ID_NZG_VIEW                     32773
+#define ID_NEW_PLOT2D                   32774
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        312
-#define _APS_NEXT_COMMAND_VALUE         32774
+#define _APS_NEXT_RESOURCE_VALUE        313
+#define _APS_NEXT_COMMAND_VALUE         32775
 #define _APS_NEXT_CONTROL_VALUE         1002
-#define _APS_NEXT_SYMED_VALUE           313
+#define _APS_NEXT_SYMED_VALUE           316
 #endif
 #endif

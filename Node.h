@@ -60,7 +60,8 @@ namespace nzg
 		enum NodeType
 		{
 			entUnk = 0,
-			entNzg = 1
+			entNzg = 1,
+			entPlot2d = 2
 		};
 
 		// Attributes:
@@ -69,6 +70,9 @@ namespace nzg
 		Node* m_parent;
 
 		bool isNzg() const { return m_ent == entNzg; }
+		bool isPlot2d() const {
+			return m_ent == entPlot2d;
+		}
 
 		// Overrides:
 	public:

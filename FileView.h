@@ -5,6 +5,7 @@
 
 #include "TreeCtrlEx.h"
 #include "NzgNode.h"
+#include "Plot2dNode.h"
 
 
 class CFileViewToolBar : public CMFCToolBar
@@ -42,6 +43,7 @@ public:
 	virtual ~CFileView();
 
 	void newNzg(nzg::NzgNode * p);
+	void newPlot2d(nzg::Plot2dNode* p);
 
 protected:
 	nzg::TreeCtrlEx& getTree() {

@@ -207,6 +207,10 @@
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Plot2d.h" />
+    <ClInclude Include="Plot2dDoc.h" />
+    <ClInclude Include="Plot2dFrame.h" />
+    <ClInclude Include="Plot2dNode.h" />
+    <ClInclude Include="Plot2dView.h" />
     <ClInclude Include="Plot3d.h" />
     <ClInclude Include="Points.h" />
     <ClInclude Include="PropertiesWnd.h" />
@@ -246,6 +250,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Plot2d.cpp" />
+    <ClCompile Include="Plot2dDoc.cpp" />
+    <ClCompile Include="Plot2dFrame.cpp" />
+    <ClCompile Include="Plot2dNode.cpp" />
+    <ClCompile Include="Plot2dView.cpp" />
     <ClCompile Include="Plot3d.cpp" />
     <ClCompile Include="Points.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />

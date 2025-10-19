@@ -135,6 +135,16 @@ void CFileView::newNzg(nzg::NzgNode * p)
 	t.setData((DWORD_PTR)p);
 }
 
+void CFileView::newPlot2d(nzg::Plot2dNode* p)
+{
+	nzg::TreeCtrlEx& tree = (nzg::TreeCtrlEx&)m_wndFileView;
+
+	nzg::TreeCursor tRoot = tree.getRootItem();
+
+	nzg::TreeCursor t = tRoot.addTail("Plot2d");
+	t.setData((DWORD_PTR)p);
+}
+
 void CFileView::OnContextMenu(CWnd* pWnd, CPoint point)
 {
 	nzg::TreeCtrlEx& tree = getTree();
@@ -164,6 +174,8 @@ void CFileView::OnContextMenu(CWnd* pWnd, CPoint point)
 			return 1;
 		nzg::Node* p = (nzg::Node*)d;
 		if (p->isNzg())
+			return 2;
+		if (p->isPlot2d())
 			return 2;
 		return 1;
 	};
@@ -283,8 +295,11 @@ void CFileView::OnNzgView()
 	if (m_tClicked == NULL)
 		return;
 
-	nzg::NzgNode* pn = (nzg::NzgNode*)m_tClicked.getData();
-	pApp->onViewNzg(pn);
+	nzg::Node* pn = (nzg::Node*)m_tClicked.getData();
+	if (pn->isNzg())
+		pApp->onViewNzg((nzg::NzgNode*)pn);
+	else if (pn->isPlot2d())
+		pApp->onViewPlot2d((nzg::Plot2dNode*)pn);
 }
 
 
