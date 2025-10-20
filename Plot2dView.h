@@ -65,6 +65,8 @@ protected:
 	afx_msg void OnBnClickedButtonSetPlotTitle();
 
 	afx_msg void OnCurveFormat();
+public:
+	afx_msg void OnBnClickedButtonUpdate();
 };
 
 
