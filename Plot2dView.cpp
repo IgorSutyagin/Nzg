@@ -68,6 +68,7 @@ BEGIN_MESSAGE_MAP(CPlot2dView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON_SAVE, &CPlot2dView::OnBnClickedButtonSave)
 	ON_BN_CLICKED(IDC_BUTTON_LOAD, &CPlot2dView::OnBnClickedButtonLoad)
 
+	ON_BN_CLICKED(IDC_BUTTON_UPDATE, &CPlot2dView::OnBnClickedButtonUpdate)
 END_MESSAGE_MAP()
 
 
@@ -525,4 +526,8 @@ void CPlot2dView::OnCurveFormat()
 	m_wndPlot.Invalidate();
 	m_wndPlot.UpdateWindow();
 	*/
+}
+void CPlot2dView::OnBnClickedButtonUpdate()
+{
+	updateCurves();
 }
